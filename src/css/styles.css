@@ -24,6 +24,19 @@ body {
 
 button.hidden{
   display: none;
+  /* background-color: rgb(116, 111, 111);
+    padding: 10px 15px;
+    width: 130px;
+    font-size: 17px;
+    font-weight: 300;
+    color: rgb(65, 63, 63);
+    border: none;
+    border-radius: 4px;
+  text-align: center;
+  margin: 0 auto;
+  margin-top: 50px; */
+  /* display: block; */
+
 }
 
 
@@ -69,10 +82,36 @@ button.hidden{
   .form-wrapper {
     background-color: rgb(186, 160, 211);
     height: 40px;
-    text-align: center;
+    /* text-align: center; */
     margin-bottom: 10px;
   }
 
   .form-input{
     height: 35px;
   }
+
+
+  
+  .load-more{
+    background-color: rgb(186, 160, 211);
+    padding: 10px 15px;
+    width: 130px;
+    font-size: 17px;
+    font-weight: 300;
+    color: white;
+    border: none;
+    border-radius: 4px;
+  text-align: center;
+  margin: 0 auto;
+  margin-top: 50px;
+  display: block;
+  cursor: pointer;
+  }
+
+
+  .load-more:hover{
+    background-color: rgb(179, 138, 216);
+  }
+
+
+  
