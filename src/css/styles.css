@@ -14,12 +14,12 @@ body {
   
 }
 
-#search-box {
+/* #search-box {
   font: inherit;
   padding: 8px;
   max-width: 320px;
   margin-bottom: 16px;
-}
+} */
 
 
 button.hidden{
@@ -79,16 +79,18 @@ button.hidden{
     line-height: 1.1;
   }
 
-  .form-wrapper {
+  /* .form-wrapper {
     background-color: rgb(186, 160, 211);
     height: 40px;
     /* text-align: center; */
-    margin-bottom: 10px;
-  }
+    /* margin-bottom: 10px;
+    
+  } */
 
-  .form-input{
+  /* .form-input{
     height: 35px;
-  }
+    
+  } */ 
 
 
   
@@ -114,4 +116,50 @@ button.hidden{
   }
 
 
+  .search {
+    display: flex;
+    margin-bottom: 10px;
+    justify-content: center;
+    padding: 20px;
+    background-color:  rgb(186, 160, 211);
+  }
   
+  .search-form {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    max-width: 400px;
+    background-color: #fff;
+    border-radius: 10px;
+    /* box-shadow: 0 4px 8px rgba(168, 24, 24, 0.1); */
+     /* overflow: hidden;  */
+  }
+  
+  .form-input {
+    flex: 1;
+    border: none;
+    padding: 15px;
+    font-size: 16px;
+    background-color: transparent;
+    /* margin-right: 10px; */
+  }
+
+  search-form input:focus {
+    outline: none;
+  }
+  
+  button {
+    border: none;
+    background-color: rgba(46, 45, 45, 0.1);
+    cursor: pointer;
+    padding: 15px 20px;
+  }
+  
+  button i {
+    font-size: 18px;
+    color: #ccc;
+  }
+  
+  button:hover i {
+    color: #333;
+  }

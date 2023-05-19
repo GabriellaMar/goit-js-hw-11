@@ -36,10 +36,4 @@ export default class LoadMoreBtn {
     this.button.disabled = true; 
     Notiflix.Notify.info("We're sorry, but you've reached the end of search results.");
   }
-
-//   reset() {
-//     this.show();
-//     this.button.disabled = false;
-//     this.button.textContent = 'Load more';
-//   }
 }
