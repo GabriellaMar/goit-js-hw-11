@@ -36,20 +36,29 @@ async function onSearchFormSubmit(event) {
       galleryService.resetPage();
       formEl.reset();
       clearGalleryList();
+      
       const data = await galleryService.getImages();
+      // console.log('perPage is:', response.data.per_page);
+      console.log(data);
+      console.log(galleryService.page)
+      const markup = data.hits.map(image => createPhotoMarkup(image)).join('');
 
-      if (data.hits.length === 0) {
-        Notiflix.Notify.failure("Sorry, there are no images matching your search query. Please try again.");
-        galleryService.resetPage();
-        loadMoreBtn.hide()
-        return;
-      }
-      else {
-        Notiflix.Notify.success(`Hooray! We found ${data.totalHits} images.`)
-        const markup = data.hits.map(image => createPhotoMarkup(image)).join('');
-        updateGalleryList(markup);
-        loadMoreBtn.show();
-      }
+        if (data.hits.length === 0) {
+          Notiflix.Notify.failure("Sorry, there are no images matching your search query. Please try again.");
+          galleryService.resetPage();
+          loadMoreBtn.hide()
+           return;
+         }
+         else if (data.hits.length < galleryService.perPage) {
+          updateGalleryList(markup);
+          loadMoreBtn.hide();
+        }
+        else {
+          Notiflix.Notify.success(`Hooray! We found ${data.totalHits} images.`)
+        //  const markup = data.hits.map(image => createPhotoMarkup(image)).join('');
+          updateGalleryList(markup);
+          loadMoreBtn.show();
+        }
     } catch (err) {
       console.log(err);
     }
@@ -59,9 +68,11 @@ async function onSearchFormSubmit(event) {
 async function onLoadMoreBtnClick() {
   loadMoreBtn.disable();
   try {
+   galleryService.incrementPage()
+
     const data = await galleryService.getImages();
     const totalPages = Math.ceil(data.totalHits / galleryService.perPage);
-
+    console.log(galleryService.page)
     loadMoreBtn.enable();
 
     const markup = data.hits.map(image => createPhotoMarkup(image)).join('');
@@ -82,7 +93,8 @@ async function onLoadMoreBtnClick() {
     if (galleryService.page >= totalPages) {
       Notiflix.Notify.info("We're sorry, but you've reached the end of search results.");
       loadMoreBtn.hide();
-    } else {
+    }
+    else {
       loadMoreBtn.show();
     }
 

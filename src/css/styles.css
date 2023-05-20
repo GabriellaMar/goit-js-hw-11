@@ -119,7 +119,7 @@ button.hidden{
   .search {
     display: flex;
     margin-bottom: 10px;
-    justify-content: center;
+    /* justify-content: center; */
     padding: 20px;
     background-color:  rgb(186, 160, 211);
   }
