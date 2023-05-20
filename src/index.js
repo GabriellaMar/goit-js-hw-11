@@ -26,9 +26,13 @@ async function onSearchFormSubmit(event) {
   const formEl = event.currentTarget;
   const inputValue = formEl.elements.searchQuery.value.trim();
 
-  if (!inputValue === "") {
+  // if (!inputValue) {
+  //   Notiflix.Notify.failure("Sorry, there are no images matching your search query. Please try again.");
+  //   loadMoreBtn.hide();
+  // }
+  if (!inputValue || !inputValue.match(/^[A-Za-z]+$/)) {
     Notiflix.Notify.failure("Sorry, there are no images matching your search query. Please try again.");
-    loadMoreBtn.hide();
+       loadMoreBtn.hide();
   }
   else {
     try {
@@ -36,29 +40,25 @@ async function onSearchFormSubmit(event) {
       galleryService.resetPage();
       formEl.reset();
       clearGalleryList();
-      
+
       const data = await galleryService.getImages();
-      // console.log('perPage is:', response.data.per_page);
-      console.log(data);
-      console.log(galleryService.page)
       const markup = data.hits.map(image => createPhotoMarkup(image)).join('');
 
-        if (data.hits.length === 0) {
-          Notiflix.Notify.failure("Sorry, there are no images matching your search query. Please try again.");
-          galleryService.resetPage();
-          loadMoreBtn.hide()
-           return;
-         }
-         else if (data.hits.length < galleryService.perPage) {
-          updateGalleryList(markup);
-          loadMoreBtn.hide();
-        }
-        else {
-          Notiflix.Notify.success(`Hooray! We found ${data.totalHits} images.`)
-        //  const markup = data.hits.map(image => createPhotoMarkup(image)).join('');
-          updateGalleryList(markup);
-          loadMoreBtn.show();
-        }
+      if (data.hits.length === 0) {
+        Notiflix.Notify.failure("Sorry, there are no images matching your search query. Please try again.");
+        galleryService.resetPage();
+        loadMoreBtn.hide()
+        return;
+      }
+      else if (data.hits.length < galleryService.perPage) {
+        updateGalleryList(markup);
+        loadMoreBtn.hide();
+      }
+      else {
+        Notiflix.Notify.success(`Hooray! We found ${data.totalHits} images.`)
+        updateGalleryList(markup);
+        loadMoreBtn.show();
+      }
     } catch (err) {
       console.log(err);
     }
@@ -68,7 +68,7 @@ async function onSearchFormSubmit(event) {
 async function onLoadMoreBtnClick() {
   loadMoreBtn.disable();
   try {
-   galleryService.incrementPage()
+    galleryService.incrementPage()
 
     const data = await galleryService.getImages();
     const totalPages = Math.ceil(data.totalHits / galleryService.perPage);

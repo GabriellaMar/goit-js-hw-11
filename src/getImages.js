@@ -23,9 +23,7 @@ export default class GalleryService {
     }
     try {
       const response = await axios.get(`${this.URL}`, { params });
-      const { hits, totalHits } = response.data
-      // console.log(response.data)
-      // this.incrementPage()
+      const { hits, totalHits } = response.data;
       return { hits, totalHits };
     } catch (error) {
       console.log(error);
